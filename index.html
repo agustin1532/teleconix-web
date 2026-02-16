@@ -9,7 +9,6 @@
 body{margin:0;font-family:Arial;background:#0c0f2b;color:white}
 canvas{position:fixed;z-index:-1}
 
-/* Luz logo */
 .logoGlow{position:relative;display:inline-block}
 .logoGlow::before{
 content:"";position:absolute;width:260px;height:120px;
@@ -27,9 +26,12 @@ filter:blur(45px);animation:pulse 4s infinite;top:-30px;left:-40px;z-index:-1}
 .search{width:100%;padding:15px;border-radius:15px;border:none;margin-bottom:30px}
 
 .card{background:#171a3f;padding:20px;border-radius:20px;margin-bottom:25px}
+.phoneImg{width:100%;border-radius:15px;margin-bottom:12px}
+
 .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
 .btn{background:#2a2f55;padding:8px 12px;border-radius:10px;cursor:pointer;position:relative}
 .btn.active{background:rgba(255,208,0,0.4)}
+
 .popular{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:#ffd000;color:black;font-size:10px;padding:2px 6px;border-radius:8px}
 .priceBox{margin-top:15px;background:#2a2f55;padding:10px;border-radius:10px}
 .buyBtn{margin-top:15px;background:#25d366;padding:12px;border-radius:15px;text-align:center;cursor:pointer}
@@ -71,7 +73,7 @@ filter:blur(45px);animation:pulse 4s infinite;top:-30px;left:-40px;z-index:-1}
 <a class="whatsappFloat" href="https://wa.me/5493751667267">💬</a>
 
 <script>
-// Fondo estrellas
+// estrellas fondo
 const canvas=document.getElementById("bg");const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;canvas.height=window.innerHeight;
 let stars=[];for(let i=0;i<80;i++){stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2})}
@@ -79,7 +81,17 @@ function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle="rgb
 stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();s.y+=0.2;if(s.y>canvas.height)s.y=0});requestAnimationFrame(anim)}anim();
 
 const celulares=[
-{nombre:"Redmi 14C",ram:"8GB",alm:"256GB",id:"redmi14c",precios:[110000,74000,62000,55000,49000],colores:["Negro","Azul","Verde","Morado"]},
+{
+nombre:"Redmi 14C",ram:"8GB",alm:"256GB",id:"redmi14c",
+precios:[110000,74000,62000,55000,49000],
+colores:["Negro","Azul","Verde","Morado"],
+imagenes:{
+Negro:"redmi14c-negro.png",
+Verde:"redmi14c-verde.png",
+Azul:"redmi14c-azul.png",
+Morado:"redmi14c-violeta.png"
+}
+},
 {nombre:"Motorola G04s",ram:"4GB",alm:"64GB",id:"g04s",precios:[92000,61000,51000,46000,41000],colores:["Negro","Azul","Verde"]},
 {nombre:"Samsung A06",ram:"4GB",alm:"64GB",id:"a06",precios:[84000,56000,46000,42000,37000],colores:["Negro","Celeste","Verde","Dorado"]},
 {nombre:"Samsung A07 64GB",ram:"4GB",alm:"64GB",id:"a07_64",precios:[90000,60000,50000,45000,40000],colores:["Negro","Violeta","Verde"]},
@@ -100,12 +112,18 @@ let seleccion={},colorElegido={};
 function crearCatalogo(lista){
 document.getElementById("productos").innerHTML="";
 lista.forEach(cel=>{
+let imgHTML="";
+if(cel.imagenes){
+imgHTML=`<img id="img-${cel.id}" src="${cel.imagenes.Negro}" class="phoneImg">`;
+}
+
 let coloresHTML="";
 cel.colores.forEach(color=>{coloresHTML+=`<div class="btn" onclick="setColor('${cel.id}','${color}',this)">${color}</div>`});
 let avisoHTML=cel.aviso?`<div class="aviso">🔒 Se solicitarán datos adicionales</div>`:"";
 
 document.getElementById("productos").innerHTML+=`
 <div class="card">
+${imgHTML}
 <h2>${cel.nombre}</h2>
 <p>${cel.ram} RAM · ${cel.alm}</p>
 <p><b>Colores</b></p>
@@ -125,10 +143,38 @@ ${avisoHTML}
 }
 crearCatalogo(celulares);
 
-function setColor(id,color,btn){colorElegido[id]=color;btn.parentNode.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
-function setPlan(id,index,btn){let cel=celulares.find(c=>c.id==id);seleccion[id]=index;document.getElementById(id).innerText="$"+cel.precios[index];btn.parentNode.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
-function comprar(id){let cel=celulares.find(c=>c.id==id);let cuotas=[3,6,9,12,18];let i=seleccion[id]??2;let cuota=cel.precios[i];let color=colorElegido[id]??"a definir";let msg=`Hola Teleconix! Me interesa el ${cel.nombre} ${cel.ram} ${cel.alm} color ${color} en ${cuotas[i]} cuotas de $${cuota}`;window.open(`https://wa.me/5493751667267?text=${encodeURIComponent(msg)}`)}
-document.getElementById("searchInput").addEventListener("keyup",function(){let t=this.value.toLowerCase();crearCatalogo(celulares.filter(c=>c.nombre.toLowerCase().includes(t)))})
+function setColor(id,color,btn){
+colorElegido[id]=color;
+btn.parentNode.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+let cel=celulares.find(c=>c.id==id);
+if(cel.imagenes && cel.imagenes[color]){
+document.getElementById("img-"+id).src=cel.imagenes[color];
+}
+}
+
+function setPlan(id,index,btn){
+let cel=celulares.find(c=>c.id==id);
+seleccion[id]=index;
+document.getElementById(id).innerText="$"+cel.precios[index];
+btn.parentNode.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+}
+
+function comprar(id){
+let cel=celulares.find(c=>c.id==id);
+let cuotas=[3,6,9,12,18];
+let i=seleccion[id]??2;
+let cuota=cel.precios[i];
+let color=colorElegido[id]??"a definir";
+let msg=`Hola Teleconix! Me interesa el ${cel.nombre} ${cel.ram} ${cel.alm} color ${color} en ${cuotas[i]} cuotas de $${cuota}`;
+window.open(`https://wa.me/5493751667267?text=${encodeURIComponent(msg)}`);
+}
+
+document.getElementById("searchInput").addEventListener("keyup",function(){
+let t=this.value.toLowerCase();
+crearCatalogo(celulares.filter(c=>c.nombre.toLowerCase().includes(t)));
+})
 </script>
 </body>
 </html>
