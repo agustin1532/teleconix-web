@@ -7,25 +7,30 @@
 
 <style>
 body{margin:0;font-family:Arial;background:#0c0f2b;color:white}
+canvas{position:fixed;z-index:-1}
 
-/* ✨ LUZ LOGO */
+/* LUZ LOGO */
 .logoGlow{position:relative;display:inline-block}
 .logoGlow::before{
 content:"";position:absolute;width:260px;height:120px;
-background:radial-gradient(circle,rgba(255,208,0,0.8),rgba(0,140,255,0.5),transparent);
-filter:blur(45px);animation:pulse 5s infinite;top:-30px;left:-40px;z-index:-1}
-@keyframes pulse{0%{opacity:0.3;transform:scale(0.9)}50%{opacity:1;transform:scale(1.2)}100%{opacity:0.3;transform:scale(0.9)}}
+background:radial-gradient(circle,rgba(255,208,0,0.9),rgba(0,140,255,0.6),transparent);
+filter:blur(45px);animation:pulse 4s infinite;top:-30px;left:-40px;z-index:-1}
+@keyframes pulse{0%{opacity:.3;transform:scale(.9)}50%{opacity:1;transform:scale(1.2)}100%{opacity:.3;transform:scale(.9)}}
 
+/* HERO */
 .hero{height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .hero h1{font-size:48px;color:#ffd000}
 .hero p{max-width:330px;color:#c7c9ff;margin:20px}
 .btnCatalogo{background:#ffd000;padding:15px 25px;border-radius:20px;text-decoration:none;color:black;font-weight:bold}
 
+/* SECCIONES */
 .section{padding:30px 20px;max-width:550px;margin:auto}
 .box{background:#171a3f;padding:20px;border-radius:20px;margin-bottom:20px}
 
+/* BUSCADOR */
 .search{width:100%;padding:15px;border-radius:15px;border:none;margin-bottom:30px}
 
+/* PRODUCTOS */
 .card{background:#171a3f;padding:20px;border-radius:20px;margin-bottom:25px}
 .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
 .btn{background:#2a2f55;padding:8px 12px;border-radius:10px;cursor:pointer;position:relative}
@@ -34,12 +39,14 @@ filter:blur(45px);animation:pulse 5s infinite;top:-30px;left:-40px;z-index:-1}
 .priceBox{margin-top:15px;background:#2a2f55;padding:10px;border-radius:10px}
 .buyBtn{margin-top:15px;background:#25d366;padding:12px;border-radius:15px;text-align:center;cursor:pointer}
 
+/* WhatsApp flotante */
 .whatsappFloat{position:fixed;bottom:20px;right:20px;background:#25d366;width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:28px;animation:float 2s infinite;text-decoration:none;color:white}
 @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
 </style>
 </head>
 
 <body>
+<canvas id="bg"></canvas>
 
 <section class="hero">
 <div class="logoGlow"><h1>TELECONIX</h1></div>
@@ -50,10 +57,14 @@ filter:blur(45px);animation:pulse 5s infinite;top:-30px;left:-40px;z-index:-1}
 <section class="section">
 <div class="box">
 <h3>¿Por qué elegir Teleconix?</h3>
-<p>📱 Equipos nuevos y sellados<br>
-💳 Financiación directa sin tarjeta<br>
-🧾 Compra por encargo personalizada<br>
-🤝 Atención directa por WhatsApp</p>
+<p>📱 Equipos nuevos y sellados<br>💳 Financiación directa sin tarjeta<br>🧾 Compra por encargo personalizada<br>🤝 Atención directa por WhatsApp</p>
+</div>
+</section>
+
+<section class="section">
+<div class="box">
+<h3>¿Cómo funciona la compra?</h3>
+<p>1️⃣ Elegís el celular y cuotas<br>2️⃣ Coordinamos por WhatsApp<br>3️⃣ Pagás la primera cuota<br>4️⃣ Iniciamos el pedido<br>5️⃣ Recibís tu smartphone 📦</p>
 </div>
 </section>
 
@@ -64,14 +75,25 @@ filter:blur(45px);animation:pulse 5s infinite;top:-30px;left:-40px;z-index:-1}
 
 <section class="section">
 <div class="box">
-<h3>Requisitos para adquirir en cuotas</h3>
-<p>Fotocopia DNI · Firma contrato · Sistema bloqueo · Vinculación número.</p>
+<h3>Requisitos para adquirir un teléfono en cuotas</h3>
+<p>1. Fotocopia DNI ambos lados + original.<br>
+2. Firma de recibo y contrato.<br>
+3. Sistema de bloqueo automático por falta de pago.<br>
+4. Vinculación del número telefónico al servicio.</p>
 </div>
 </section>
 
 <a class="whatsappFloat" href="https://wa.me/5493751667267">💬</a>
 
 <script>
+// Fondo partículas
+const canvas=document.getElementById("bg");const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+let particles=[];for(let i=0;i<60;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2})}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle="rgba(255,208,0,0.3)";
+particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();p.y+=0.3;if(p.y>canvas.height)p.y=0});
+requestAnimationFrame(animate)}animate();
+
 const celulares=[
 {nombre:"Samsung A16",ram:"4GB",alm:"128GB",id:"a16",precios:[110000,73000,61000,55000,49000]},
 {nombre:"Redmi 14C",ram:"8GB",alm:"256GB",id:"redmi",precios:[110000,74000,62000,55000,49000]},
