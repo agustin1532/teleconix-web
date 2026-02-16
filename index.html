@@ -9,7 +9,7 @@
 body{margin:0;font-family:Arial;background:#0c0f2b;color:white}
 canvas{position:fixed;z-index:-1}
 
-/* LUZ LOGO */
+/* Luz logo */
 .logoGlow{position:relative;display:inline-block}
 .logoGlow::before{
 content:"";position:absolute;width:260px;height:120px;
@@ -71,14 +71,13 @@ filter:blur(45px);animation:pulse 4s infinite;top:-30px;left:-40px;z-index:-1}
 <a class="whatsappFloat" href="https://wa.me/5493751667267">💬</a>
 
 <script>
-// ⭐ estrellas
+// Fondo estrellas
 const canvas=document.getElementById("bg");const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;canvas.height=window.innerHeight;
 let stars=[];for(let i=0;i<80;i++){stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2})}
 function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle="rgba(255,208,0,0.3)";
 stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();s.y+=0.2;if(s.y>canvas.height)s.y=0});requestAnimationFrame(anim)}anim();
 
-// 📱 TODOS LOS CELULARES
 const celulares=[
 {nombre:"Redmi 14C",ram:"8GB",alm:"256GB",id:"redmi14c",precios:[110000,74000,62000,55000,49000],colores:["Negro","Azul","Verde","Morado"]},
 {nombre:"Motorola G04s",ram:"4GB",alm:"64GB",id:"g04s",precios:[92000,61000,51000,46000,41000],colores:["Negro","Azul","Verde"]},
@@ -86,6 +85,7 @@ const celulares=[
 {nombre:"Samsung A07 64GB",ram:"4GB",alm:"64GB",id:"a07_64",precios:[90000,60000,50000,45000,40000],colores:["Negro","Violeta","Verde"]},
 {nombre:"Samsung A07 128GB",ram:"4GB",alm:"128GB",id:"a07_128",precios:[104000,69000,58000,52000,46000],colores:["Negro","Violeta","Verde"]},
 {nombre:"Samsung A16",ram:"4GB",alm:"128GB",id:"a16",precios:[108000,72000,60000,54000,48000],colores:["Negro","Verde","Celeste","Gris"]},
+{nombre:"Samsung A17",ram:"8GB",alm:"256GB",id:"a17",precios:[175000,117000,98000,88000,78000],colores:["Negro","Verde","Celeste","Gris"]},
 {nombre:"Samsung A26",ram:"6GB",alm:"128GB",id:"a26",precios:[177000,118000,98000,89000,79000],colores:["Negro","Blanco","Menta","Rosa"]},
 {nombre:"Samsung A36",ram:"8GB",alm:"128GB",id:"a36_128",precios:[201000,134000,112000,101000,90000],colores:["Negro","Verde","Celeste","Gris"]},
 {nombre:"Samsung A36 256GB",ram:"8GB",alm:"256GB",id:"a36_256",precios:[217000,145000,120000,109000,96000],colores:["Negro","Verde","Celeste","Gris"]},
