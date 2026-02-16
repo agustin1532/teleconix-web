@@ -7,97 +7,103 @@
 
 <style>
 body{margin:0;font-family:Arial;background:#0c0f2b;color:white}
-
-/* FONDO ANIMADO */
 canvas{position:fixed;z-index:-1}
 
 /* HERO */
 .hero{height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .hero h1{font-size:45px;color:#ffd000}
-.hero p{max-width:300px;color:#c7c9ff}
+.hero p{max-width:330px;color:#c7c9ff}
 .btnCatalogo{background:#ffd000;padding:15px 25px;border-radius:20px;text-decoration:none;color:black;font-weight:bold}
 
-/* CATALOGO */
-.catalogo{padding:20px;max-width:500px;margin:auto}
-.search{width:100%;padding:15px;border-radius:15px;border:none;margin-bottom:30px}
-.card{background:#171a3f;padding:20px;border-radius:20px;margin-bottom:25px}
+/* SECCIONES */
+.section{padding:30px 20px;max-width:550px;margin:auto}
+.box{background:#171a3f;padding:20px;border-radius:20px;margin-bottom:20px}
 
+/* BUSCADOR */
+.search{width:100%;padding:15px;border-radius:15px;border:none;margin-bottom:30px}
+
+/* PRODUCTOS */
+.card{background:#171a3f;padding:20px;border-radius:20px;margin-bottom:25px}
 .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
 .btn{background:#2a2f55;padding:8px 12px;border-radius:10px;cursor:pointer;position:relative}
 .btn.active{background:rgba(255,208,0,0.4)}
-
-.popular{
-position:absolute;
-top:-15px;
-left:50%;
-transform:translateX(-50%);
-background:#ffd000;
-color:black;
-font-size:10px;
-padding:2px 6px;
-border-radius:8px;
-}
-
+.popular{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:#ffd000;color:black;font-size:10px;padding:2px 6px;border-radius:8px}
 .priceBox{margin-top:15px;background:#2a2f55;padding:10px;border-radius:10px}
-
 .buyBtn{margin-top:15px;background:#25d366;padding:12px;border-radius:15px;text-align:center;cursor:pointer}
 
-/* WhatsApp flotante */
-.whatsappFloat{
-position:fixed;bottom:20px;right:20px;background:#25d366;
-width:60px;height:60px;border-radius:50%;
-display:flex;justify-content:center;align-items:center;
-font-size:28px;animation:float 2s infinite;text-decoration:none;color:white}
+/* WHATSAPP */
+.whatsappFloat{position:fixed;bottom:20px;right:20px;background:#25d366;width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:28px;animation:float 2s infinite;text-decoration:none;color:white}
 @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
 </style>
 </head>
 
 <body>
-
 <canvas id="bg"></canvas>
 
 <section class="hero">
 <h1>TELECONIX</h1>
-<p>Pagando la primera cuota hoy mismo podés tener tu smartphone.</p>
+<p>Pagando la primera cuota hoy mismo podés iniciar la compra de tu smartphone.</p>
 <a href="#catalogo" class="btnCatalogo">Ver catálogo</a>
 </section>
 
-<section id="catalogo" class="catalogo">
+<!-- CONFIANZA -->
+<section class="section">
+<div class="box">
+<h3>¿Por qué elegir Teleconix?</h3>
+<p>📱 Equipos nuevos y sellados<br>
+💳 Financiación directa sin tarjeta<br>
+🧾 Compra por encargo personalizada<br>
+🤝 Atención directa por WhatsApp</p>
+</div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="section">
+<div class="box">
+<h3>¿Cómo funciona la compra?</h3>
+<p>
+1️⃣ Elegís tu celular y la cantidad de cuotas<br>
+2️⃣ Coordinamos la compra por WhatsApp<br>
+3️⃣ Pagás la primera cuota<br>
+4️⃣ Iniciamos el pedido de tu equipo<br>
+5️⃣ Recibís tu smartphone 📦
+</p>
+</div>
+</section>
+
+<!-- BUSCADOR + PRODUCTOS -->
+<section id="catalogo" class="section">
 <input class="search" id="searchInput" placeholder="Buscar celular...">
 <div id="productos"></div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+<div class="box">
+<h3>Preguntas frecuentes</h3>
+<p><b>¿Los celulares son nuevos?</b><br>Todos los equipos son nuevos y sellados.</p>
+<p><b>¿Necesito tarjeta?</b><br>No, la financiación es directa.</p>
+<p><b>¿Puedo consultar antes?</b><br>Sí, escribinos sin compromiso.</p>
+</div>
 </section>
 
 <a class="whatsappFloat" href="https://wa.me/5493751667267">💬</a>
 
 <script>
+// Fondo animado
+const canvas=document.getElementById("bg");const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+let particles=[];for(let i=0;i<60;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2})}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle="rgba(255,208,0,0.3)";
+particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();p.y+=0.3;if(p.y>canvas.height)p.y=0});
+requestAnimationFrame(animate)}animate();
 
-/* PARTICULAS FONDO */
-const canvas=document.getElementById("bg");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-let particles=[];
-for(let i=0;i<60;i++){
-particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2})
-}
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle="rgba(255,208,0,0.3)";
-particles.forEach(p=>{
-ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
-p.y+=0.3;if(p.y>canvas.height)p.y=0;
-});
-requestAnimationFrame(animate);
-}
-animate();
-
-/* CATALOGO */
+// Catalogo
 const celulares=[
 {nombre:"Samsung A16",ram:"4GB",alm:"128GB",id:"a16",precios:[110000,73000,61000,55000,49000]},
 {nombre:"Redmi 14C",ram:"8GB",alm:"256GB",id:"redmi",precios:[110000,74000,62000,55000,49000]},
 {nombre:"Motorola G04s",ram:"4GB",alm:"64GB",id:"g04s",precios:[92000,61000,51000,46000,41000]}
 ]
-
 let seleccion={};
 
 function crearCatalogo(lista){
@@ -107,7 +113,6 @@ document.getElementById("productos").innerHTML+=`
 <div class="card">
 <h2>${cel.nombre}</h2>
 <p>${cel.ram} RAM · ${cel.alm}</p>
-
 <div class="buttons">
 <div class="btn" onclick="setPlan('${cel.id}',0,this)">3</div>
 <div class="btn" onclick="setPlan('${cel.id}',1,this)">6</div>
@@ -115,23 +120,17 @@ document.getElementById("productos").innerHTML+=`
 <div class="btn" onclick="setPlan('${cel.id}',3,this)">12</div>
 <div class="btn" onclick="setPlan('${cel.id}',4,this)">18</div>
 </div>
-
-<div class="priceBox">
-<p>Cuota mensual: <b id="${cel.id}">$${cel.precios[2]}</b></p>
-</div>
-
+<div class="priceBox"><p>Cuota mensual: <b id="${cel.id}">$${cel.precios[2]}</b></p></div>
 <div class="buyBtn" onclick="comprar('${cel.id}')">Comprar por WhatsApp</div>
 </div>`;
 });
 }
-
 crearCatalogo(celulares);
 
 function setPlan(id,index,btn){
 let cel=celulares.find(c=>c.id==id);
 seleccion[id]=index;
 document.getElementById(id).innerText="$"+cel.precios[index];
-
 btn.parentNode.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
 btn.classList.add('active');
 }
@@ -142,11 +141,9 @@ let cuotas=[3,6,9,12,18];
 let index=seleccion[id]??2;
 let cuota=cel.precios[index];
 let restantes=cuotas[index]-1;
-
-let msg=`Hola Teleconix! Me gustaría adquirir el ${cel.nombre} ${cel.ram} ${cel.alm}.
+let msg=`Hola Teleconix! Me interesa el ${cel.nombre} ${cel.ram} ${cel.alm}.
 Quisiera financiarlo en ${cuotas[index]} cuotas de $${cuota}.
-Entiendo que retiro el equipo abonando la primera cuota hoy y luego ${restantes} cuotas mensuales de $${cuota}.`;
-
+Entiendo que inicio la compra abonando la primera cuota hoy y luego ${restantes} cuotas mensuales de $${cuota}.`;
 window.open(`https://wa.me/5493751667267?text=${encodeURIComponent(msg)}`);
 }
 
@@ -154,7 +151,6 @@ document.getElementById("searchInput").addEventListener("keyup",function(){
 let texto=this.value.toLowerCase();
 crearCatalogo(celulares.filter(c=>c.nombre.toLowerCase().includes(texto)));
 })
-
 </script>
 </body>
 </html>
