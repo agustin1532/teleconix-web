@@ -1,103 +1,155 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teleconix | Celulares a Crédito</title>
-  <style>
-    body{
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:#0f172a;
-      color:white;
-      text-align:center;
-    }
-    .hero{
-      padding:60px 20px;
-    }
-    h1{
-      font-size:40px;
-      margin-bottom:10px;
-    }
-    .sub{
-      color:#cbd5e1;
-      margin-bottom:40px;
-    }
-    .productos{
-      display:flex;
-      flex-direction:column;
-      gap:25px;
-      padding:20px;
-      max-width:400px;
-      margin:auto;
-    }
-    .card{
-      background:#1e293b;
-      padding:25px;
-      border-radius:20px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.4);
-    }
-    .precio{
-      font-size:28px;
-      font-weight:bold;
-      margin:15px 0;
-    }
-    .cuotas{
-      background:white;
-      color:black;
-      margin-top:50px;
-      padding:40px 20px;
-    }
-    .btn{
-      background:#22c55e;
-      color:white;
-      padding:15px 25px;
-      border-radius:15px;
-      text-decoration:none;
-      display:inline-block;
-      margin-top:15px;
-      font-weight:bold;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teleconix</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#0c1230;
+  color:white;
+}
+
+.container{
+  padding:20px;
+  max-width:450px;
+  margin:auto;
+}
+
+.card{
+  background:#1a214a;
+  padding:20px;
+  border-radius:20px;
+  margin-bottom:30px;
+  box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+h1{
+  text-align:center;
+  color:#f7c600;
+}
+
+.subtitle{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+img{
+  width:100%;
+  border-radius:15px;
+}
+
+.buttons{
+  display:flex;
+  justify-content:space-between;
+  margin-top:15px;
+}
+
+.btn{
+  border:2px solid #444;
+  padding:8px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.active{
+  border:2px solid #f7c600;
+  color:#f7c600;
+}
+
+.priceBox{
+  margin-top:20px;
+  background:#2a2f55;
+  padding:15px;
+  border-radius:15px;
+}
+
+.whatsapp{
+  margin-top:20px;
+  background:#f7c600;
+  color:black;
+  padding:15px;
+  text-align:center;
+  border-radius:15px;
+  font-weight:bold;
+}
+</style>
 </head>
+
 <body>
 
-  <div class="hero">
-    <h1>📱 TELECONIX</h1>
-    <p class="sub">Celulares nuevos • Entrega inmediata • Financiación</p>
-  </div>
+<div class="container">
 
-  <div class="productos">
+<h1>TELECONIX</h1>
+<p class="subtitle">Pagando la primera cuota te llevás tu celular hoy</p>
 
-    <div class="card">
-      <h2>Samsung A16</h2>
-      <p>4GB RAM • 128GB</p>
-      <div class="precio">$220.000</div>
-      <a class="btn" href="https://wa.me/5490000000000">Comprar</a>
-    </div>
+<!-- 🔥 SAMSUNG A16 -->
+<div class="card">
+<img src="A16.jpg">
 
-    <div class="card">
-      <h2>Redmi 14C</h2>
-      <p>4GB RAM • 128GB</p>
-      <div class="precio">$198.000</div>
-      <a class="btn" href="https://wa.me/5490000000000">Comprar</a>
-    </div>
+<h2>Samsung Galaxy A16</h2>
+<p>4GB RAM · 128GB</p>
 
-    <div class="card">
-      <h2>Motorola G04s</h2>
-      <p>4GB RAM • 128GB</p>
-      <div class="precio">$210.000</div>
-      <a class="btn" href="https://wa.me/5490000000000">Comprar</a>
-    </div>
+<div class="buttons">
+<div class="btn" onclick="setPlan('a16',0)">3</div>
+<div class="btn" onclick="setPlan('a16',1)">6</div>
+<div class="btn active" onclick="setPlan('a16',2)">9 ⭐</div>
+<div class="btn" onclick="setPlan('a16',3)">12</div>
+<div class="btn" onclick="setPlan('a16',4)">18</div>
+</div>
 
-  </div>
+<div class="priceBox">
+<p>Primera cuota: <b id="a16_first">$61.000</b></p>
+<p>Luego cuotas de: <b id="a16_rest">$61.000</b></p>
+</div>
 
-  <div class="cuotas">
-    <h2>Financiación</h2>
-    <p>3 cuotas → 50% recargo</p>
-    <p>6 cuotas → 100% recargo</p>
-    <p>9 cuotas → 150% recargo</p>
-  </div>
+<div class="whatsapp">Consultar por WhatsApp</div>
+</div>
+
+
+<!-- 🔥 REDMI 14C -->
+<div class="card">
+<img src="redmi.jpg">
+
+<h2>Redmi 14C</h2>
+<p>8GB RAM · 256GB</p>
+
+<div class="buttons">
+<div class="btn" onclick="setPlan('redmi',0)">3</div>
+<div class="btn" onclick="setPlan('redmi',1)">6</div>
+<div class="btn active" onclick="setPlan('redmi',2)">9 ⭐</div>
+<div class="btn" onclick="setPlan('redmi',3)">12</div>
+<div class="btn" onclick="setPlan('redmi',4)">18</div>
+</div>
+
+<div class="priceBox">
+<p>Primera cuota: <b id="redmi_first">$62.000</b></p>
+<p>Luego cuotas de: <b id="redmi_rest">$62.000</b></p>
+</div>
+
+<div class="whatsapp">Consultar por WhatsApp</div>
+</div>
+
+</div>
+
+<script>
+const prices = {
+  a16:[
+    110000,73000,61000,55000,49000
+  ],
+  redmi:[
+    110000,74000,62000,55000,49000
+  ]
+}
+
+function setPlan(model,index){
+ document.getElementById(model+"_first").innerText="$"+prices[model][index].toLocaleString();
+ document.getElementById(model+"_rest").innerText="$"+prices[model][index].toLocaleString();
+}
+</script>
 
 </body>
 </html>
