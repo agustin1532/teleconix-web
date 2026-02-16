@@ -9,77 +9,89 @@
 body{
   margin:0;
   font-family: Arial, Helvetica;
-  background:#0c1230;
+  background:#0c0f2b;
   color:white;
 }
 
-.container{
-  padding:20px;
-  max-width:450px;
-  margin:auto;
+.hero{
+  height:80vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
 
-h1{
-  text-align:center;
+.hero h1{
+  font-size:45px;
   color:#ffd000;
 }
 
-.subtitle{
-  text-align:center;
-  margin-bottom:25px;
+.hero p{
+  color:#c7c9ff;
+  margin:20px;
 }
 
-.card{
-  background:#1a214a;
-  padding:20px;
-  border-radius:20px;
-  margin-bottom:30px;
-  box-shadow:0 0 20px rgba(0,0,0,0.5);
-}
-
-img{
-  width:100%;
-  border-radius:15px;
-}
-
-h2{
-  margin-top:15px;
-}
-
-.buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:15px;
-}
-
-.btn{
-  background:#2a2f55;
-  padding:10px;
-  border-radius:10px;
-  cursor:pointer;
-}
-
-.btn.active{
+.btnCatalogo{
   background:#ffd000;
+  padding:15px 25px;
+  border-radius:20px;
+  text-decoration:none;
   color:black;
   font-weight:bold;
 }
 
-.priceBox{
-  margin-top:20px;
-  background:#2a2f55;
-  padding:15px;
-  border-radius:15px;
+.catalogo{
+  padding:20px;
+  max-width:500px;
+  margin:auto;
 }
 
-.whatsapp{
-  margin-top:15px;
-  background:#ffd000;
-  color:black;
-  text-align:center;
+.search{
+  width:100%;
   padding:15px;
   border-radius:15px;
+  border:none;
+  margin-bottom:30px;
+}
+
+.card{
+  background:#171a3f;
+  padding:20px;
+  border-radius:20px;
+  margin-bottom:25px;
+}
+
+.buttons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.btn{
+  background:#2a2f55;
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.priceBox{
+  margin-top:15px;
+  background:#2a2f55;
+  padding:10px;
+  border-radius:10px;
+}
+
+.whatsappFloat{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25d366;
+  color:white;
+  padding:15px;
+  border-radius:50px;
+  text-decoration:none;
   font-weight:bold;
 }
 </style>
@@ -87,90 +99,86 @@ h2{
 
 <body>
 
-<div class="container">
-
+<section class="hero">
 <h1>TELECONIX</h1>
-<p class="subtitle">Pagando la primera cuota te llevás el equipo 📱</p>
+<p>Celulares en cuotas. Te lo llevás hoy pagando la primera.</p>
+<a href="#catalogo" class="btnCatalogo">Ver Catálogo</a>
+</section>
 
-<!-- 🔥 SAMSUNG A16 -->
-<div class="card">
-<img src="a16.png">
-<h2>Samsung Galaxy A16</h2>
-<p>4GB RAM · 128GB</p>
+<section id="catalogo" class="catalogo">
 
-<div class="buttons">
-<div class="btn" onclick="setPlan('a16',0)">3 cuotas</div>
-<div class="btn" onclick="setPlan('a16',1)">6 cuotas</div>
-<div class="btn active" onclick="setPlan('a16',2)">9 cuotas</div>
-<div class="btn" onclick="setPlan('a16',3)">12 cuotas</div>
-<div class="btn" onclick="setPlan('a16',4)">18 cuotas</div>
-</div>
+<input class="search" id="searchInput" placeholder="Buscar celular...">
 
-<div class="priceBox">
-<p>Primera cuota: <b id="a16_first">$61.000</b></p>
-<p>Luego cuotas de: <b id="a16_rest">$61.000</b></p>
-</div>
+<div id="productos"></div>
 
-<div class="whatsapp">Consultar por WhatsApp</div>
-</div>
+</section>
 
-<!-- 🔥 REDMI 14C -->
-<div class="card">
-<img src="redmi.png">
-<h2>Redmi 14C</h2>
-<p>8GB RAM · 256GB</p>
-
-<div class="buttons">
-<div class="btn" onclick="setPlan('redmi',0)">3 cuotas</div>
-<div class="btn" onclick="setPlan('redmi',1)">6 cuotas</div>
-<div class="btn active" onclick="setPlan('redmi',2)">9 cuotas ⭐</div>
-<div class="btn" onclick="setPlan('redmi',3)">12 cuotas</div>
-<div class="btn" onclick="setPlan('redmi',4)">18 cuotas</div>
-</div>
-
-<div class="priceBox">
-<p>Primera cuota: <b id="redmi_first">$62.000</b></p>
-<p>Luego cuotas de: <b id="redmi_rest">$62.000</b></p>
-</div>
-
-<div class="whatsapp">Consultar por WhatsApp</div>
-</div>
-
-<!-- 🔥 MOTOROLA G04s -->
-<div class="card">
-<img src="g04s.png">
-<h2>Motorola G04s</h2>
-<p>4GB RAM · 64GB</p>
-
-<div class="buttons">
-<div class="btn" onclick="setPlan('g04s',0)">3 cuotas</div>
-<div class="btn" onclick="setPlan('g04s',1)">6 cuotas</div>
-<div class="btn active" onclick="setPlan('g04s',2)">9 cuotas ⭐</div>
-<div class="btn" onclick="setPlan('g04s',3)">12 cuotas</div>
-<div class="btn" onclick="setPlan('g04s',4)">18 cuotas</div>
-</div>
-
-<div class="priceBox">
-<p>Primera cuota: <b id="g04s_first">$62.000</b></p>
-<p>Luego cuotas de: <b id="g04s_rest">$62.000</b></p>
-</div>
-
-<div class="whatsapp">Consultar por WhatsApp</div>
-</div>
-
-</div>
+<a class="whatsappFloat" href="https://wa.me/5493751667267">WhatsApp</a>
 
 <script>
-const prices = {
-  a16:[110000,73000,61000,55000,49000],
-  redmi:[110000,74000,62000,55000,49000],
-  g04s:[110000,74000,62000,55000,49000]
+
+const celulares = [
+{
+nombre:"Samsung A16",
+ram:"4GB",
+alm:"128GB",
+id:"a16",
+precios:[110000,73000,61000,55000,49000]
+},
+{
+nombre:"Redmi 14C",
+ram:"8GB",
+alm:"256GB",
+id:"redmi",
+precios:[110000,74000,62000,55000,49000]
+},
+{
+nombre:"Motorola G04s",
+ram:"4GB",
+alm:"64GB",
+id:"g04s",
+precios:[92000,61000,51000,46000,41000]
+}
+]
+
+function crearCatalogo(lista){
+document.getElementById("productos").innerHTML="";
+
+lista.forEach(cel=>{
+document.getElementById("productos").innerHTML+=`
+<div class="card">
+<h2>${cel.nombre}</h2>
+<p>${cel.ram} RAM · ${cel.alm}</p>
+
+<div class="buttons">
+<div class="btn" onclick="setPlan('${cel.id}',0)">3</div>
+<div class="btn" onclick="setPlan('${cel.id}',1)">6</div>
+<div class="btn" onclick="setPlan('${cel.id}',2)">9 ⭐</div>
+<div class="btn" onclick="setPlan('${cel.id}',3)">12</div>
+<div class="btn" onclick="setPlan('${cel.id}',4)">18</div>
+</div>
+
+<div class="priceBox">
+<p>Cuota: <b id="${cel.id}">$${cel.precios[2]}</b></p>
+</div>
+</div>
+`;
+});
 }
 
-function setPlan(model,index){
-  document.getElementById(model+"_first").innerText="$"+prices[model][index];
-  document.getElementById(model+"_rest").innerText="$"+prices[model][index];
+crearCatalogo(celulares);
+
+function setPlan(id,index){
+let cel=celulares.find(c=>c.id==id);
+document.getElementById(id).innerText="$"+cel.precios[index];
 }
+
+document.getElementById("searchInput").addEventListener("keyup",function(){
+let texto=this.value.toLowerCase();
+let filtrados=celulares.filter(c=>c.nombre.toLowerCase().includes(texto));
+crearCatalogo(filtrados);
+})
+
 </script>
 
 </body>
