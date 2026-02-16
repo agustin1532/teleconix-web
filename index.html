@@ -170,11 +170,13 @@ let cuotas=[3,6,9,12,18];
 let i=seleccion[id] ?? 2;
 let cuota=cel.precios[i];
 let restantes=cuotas[i]-1;
+let color=colorElegido[id] ?? "a elección";
 
-let msg=`Hola! Me interesa el ${cel.nombre}. 
-Quiero el plan de ${cuotas[i]} cuotas. 
-Pago la primera de $${cuota} y me lo llevo. 
-Quedan ${restantes} cuotas de $${cuota}.`;
+let msg=`Hola! 👋 Estoy interesado en el ${cel.nombre}.
+Me gustaría elegir el color ${color} y el plan de ${cuotas[i]} cuotas.
+Abono hoy la primera cuota de $${cuota} para iniciar la compra.
+Luego quedarían ${restantes} cuotas de $${cuota}.
+Quedo atento para continuar con la gestión. Muchas gracias.`;
 
 window.open(`https://wa.me/5493751667267?text=${encodeURIComponent(msg)}`);
 }
