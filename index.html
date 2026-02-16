@@ -167,10 +167,15 @@ btn.classList.add('active');
 function comprar(id){
 let cel=celulares.find(c=>c.id==id);
 let cuotas=[3,6,9,12,18];
-let i=seleccion[id]??2;
+let i=seleccion[id] ?? 2;
 let cuota=cel.precios[i];
-let color=colorElegido[id]??"a definir";
-let msg=`Hola Teleconix! Me interesa el ${cel.nombre} ${cel.ram} ${cel.alm} color ${color} en ${cuotas[i]} cuotas de $${cuota}`;
+let restantes=cuotas[i]-1;
+
+let msg=`Hola! Me interesa el ${cel.nombre}. 
+Quiero el plan de ${cuotas[i]} cuotas. 
+Pago la primera de $${cuota} y me lo llevo. 
+Quedan ${restantes} cuotas de $${cuota}.`;
+
 window.open(`https://wa.me/5493751667267?text=${encodeURIComponent(msg)}`);
 }
 
