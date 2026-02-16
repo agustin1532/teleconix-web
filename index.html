@@ -8,7 +8,7 @@
 <style>
 body{
   margin:0;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica;
   background:#0c1230;
   color:white;
 }
@@ -19,6 +19,16 @@ body{
   margin:auto;
 }
 
+h1{
+  text-align:center;
+  color:#ffd000;
+}
+
+.subtitle{
+  text-align:center;
+  margin-bottom:25px;
+}
+
 .card{
   background:#1a214a;
   padding:20px;
@@ -27,37 +37,33 @@ body{
   box-shadow:0 0 20px rgba(0,0,0,0.5);
 }
 
-h1{
-  text-align:center;
-  color:#f7c600;
-}
-
-.subtitle{
-  text-align:center;
-  margin-bottom:20px;
-}
-
 img{
   width:100%;
   border-radius:15px;
 }
 
+h2{
+  margin-top:15px;
+}
+
 .buttons{
   display:flex;
-  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
   margin-top:15px;
 }
 
 .btn{
-  border:2px solid #444;
-  padding:8px;
+  background:#2a2f55;
+  padding:10px;
   border-radius:10px;
   cursor:pointer;
 }
 
-.active{
-  border:2px solid #f7c600;
-  color:#f7c600;
+.btn.active{
+  background:#ffd000;
+  color:black;
+  font-weight:bold;
 }
 
 .priceBox{
@@ -68,11 +74,11 @@ img{
 }
 
 .whatsapp{
-  margin-top:20px;
-  background:#f7c600;
+  margin-top:15px;
+  background:#ffd000;
   color:black;
-  padding:15px;
   text-align:center;
+  padding:15px;
   border-radius:15px;
   font-weight:bold;
 }
@@ -84,21 +90,20 @@ img{
 <div class="container">
 
 <h1>TELECONIX</h1>
-<p class="subtitle">Pagando la primera cuota te llevás tu celular hoy</p>
+<p class="subtitle">Pagando la primera cuota te llevás el equipo 📱</p>
 
 <!-- 🔥 SAMSUNG A16 -->
 <div class="card">
-<img src="A16.jpg">
-
+<img src="a16.png">
 <h2>Samsung Galaxy A16</h2>
 <p>4GB RAM · 128GB</p>
 
 <div class="buttons">
-<div class="btn" onclick="setPlan('a16',0)">3</div>
-<div class="btn" onclick="setPlan('a16',1)">6</div>
-<div class="btn active" onclick="setPlan('a16',2)">9 ⭐</div>
-<div class="btn" onclick="setPlan('a16',3)">12</div>
-<div class="btn" onclick="setPlan('a16',4)">18</div>
+<div class="btn" onclick="setPlan('a16',0)">3 cuotas</div>
+<div class="btn" onclick="setPlan('a16',1)">6 cuotas</div>
+<div class="btn active" onclick="setPlan('a16',2)">9 cuotas</div>
+<div class="btn" onclick="setPlan('a16',3)">12 cuotas</div>
+<div class="btn" onclick="setPlan('a16',4)">18 cuotas</div>
 </div>
 
 <div class="priceBox">
@@ -109,20 +114,18 @@ img{
 <div class="whatsapp">Consultar por WhatsApp</div>
 </div>
 
-
 <!-- 🔥 REDMI 14C -->
 <div class="card">
-<img src="redmi.jpg">
-
+<img src="redmi.png">
 <h2>Redmi 14C</h2>
 <p>8GB RAM · 256GB</p>
 
 <div class="buttons">
-<div class="btn" onclick="setPlan('redmi',0)">3</div>
-<div class="btn" onclick="setPlan('redmi',1)">6</div>
-<div class="btn active" onclick="setPlan('redmi',2)">9 ⭐</div>
-<div class="btn" onclick="setPlan('redmi',3)">12</div>
-<div class="btn" onclick="setPlan('redmi',4)">18</div>
+<div class="btn" onclick="setPlan('redmi',0)">3 cuotas</div>
+<div class="btn" onclick="setPlan('redmi',1)">6 cuotas</div>
+<div class="btn active" onclick="setPlan('redmi',2)">9 cuotas ⭐</div>
+<div class="btn" onclick="setPlan('redmi',3)">12 cuotas</div>
+<div class="btn" onclick="setPlan('redmi',4)">18 cuotas</div>
 </div>
 
 <div class="priceBox">
@@ -133,21 +136,40 @@ img{
 <div class="whatsapp">Consultar por WhatsApp</div>
 </div>
 
+<!-- 🔥 MOTOROLA G04s -->
+<div class="card">
+<img src="g04s.png">
+<h2>Motorola G04s</h2>
+<p>4GB RAM · 64GB</p>
+
+<div class="buttons">
+<div class="btn" onclick="setPlan('g04s',0)">3 cuotas</div>
+<div class="btn" onclick="setPlan('g04s',1)">6 cuotas</div>
+<div class="btn active" onclick="setPlan('g04s',2)">9 cuotas ⭐</div>
+<div class="btn" onclick="setPlan('g04s',3)">12 cuotas</div>
+<div class="btn" onclick="setPlan('g04s',4)">18 cuotas</div>
+</div>
+
+<div class="priceBox">
+<p>Primera cuota: <b id="g04s_first">$62.000</b></p>
+<p>Luego cuotas de: <b id="g04s_rest">$62.000</b></p>
+</div>
+
+<div class="whatsapp">Consultar por WhatsApp</div>
+</div>
+
 </div>
 
 <script>
 const prices = {
-  a16:[
-    110000,73000,61000,55000,49000
-  ],
-  redmi:[
-    110000,74000,62000,55000,49000
-  ]
+  a16:[110000,73000,61000,55000,49000],
+  redmi:[110000,74000,62000,55000,49000],
+  g04s:[110000,74000,62000,55000,49000]
 }
 
 function setPlan(model,index){
- document.getElementById(model+"_first").innerText="$"+prices[model][index].toLocaleString();
- document.getElementById(model+"_rest").innerText="$"+prices[model][index].toLocaleString();
+  document.getElementById(model+"_first").innerText="$"+prices[model][index];
+  document.getElementById(model+"_rest").innerText="$"+prices[model][index];
 }
 </script>
 
