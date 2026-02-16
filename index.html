@@ -59,11 +59,7 @@ filter:blur(45px);animation:pulse 4s infinite;top:-30px;left:-40px;z-index:-1}
 <section class="section">
 <div class="box">
 <h3>¿Cómo funciona la compra?</h3>
-<p>1️⃣ Elegís el celular y cuotas<br>
-2️⃣ Coordinamos por WhatsApp<br>
-3️⃣ Pagás la primera cuota<br>
-4️⃣ Iniciamos el pedido<br>
-5️⃣ Recibís tu smartphone 📦</p>
+<p>1️⃣ Elegís el celular y cuotas<br>2️⃣ Coordinamos por WhatsApp<br>3️⃣ Pagás la primera cuota<br>4️⃣ Iniciamos el pedido<br>5️⃣ Recibís tu smartphone 📦</p>
 </div>
 </section>
 
@@ -75,12 +71,7 @@ filter:blur(45px);animation:pulse 4s infinite;top:-30px;left:-40px;z-index:-1}
 <section class="section">
 <div class="box">
 <h3>Requisitos para adquirir un teléfono en cuotas</h3>
-<p>
-1. Fotocopia del documento (ambos lados) junto con el original.<br><br>
-2. Firma de recibo y contrato de compra como respaldo.<br><br>
-3. Sistema de bloqueo automático si no se cumple el pago.<br><br>
-4. Vinculación del número telefónico al servicio de bloqueo.
-</p>
+<p>Fotocopia DNI · Firma contrato · Sistema bloqueo · Vinculación número.</p>
 </div>
 </section>
 
@@ -95,27 +86,34 @@ function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle="
 particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();p.y+=0.3;if(p.y>canvas.height)p.y=0});
 requestAnimationFrame(animate)}animate();
 
+// CATALOGO CON COLORES
 const celulares=[
-{nombre:"Redmi 14C",ram:"8GB",alm:"256GB",id:"redmi14c",precios:[110000,74000,62000,55000,49000]},
-{nombre:"Motorola G04s",ram:"4GB",alm:"64GB",id:"g04s",precios:[92000,61000,51000,46000,41000]},
-{nombre:"Samsung A06",ram:"4GB",alm:"64GB",id:"a06",precios:[84000,56000,46000,42000,37000]},
-{nombre:"Samsung A07",ram:"4GB",alm:"64GB",id:"a07_64",precios:[90000,60000,50000,45000,40000]},
-{nombre:"Samsung A07",ram:"4GB",alm:"128GB",id:"a07_128",precios:[104000,69000,58000,52000,46000]},
-{nombre:"Samsung A16",ram:"4GB",alm:"128GB",id:"a16",precios:[108000,72000,60000,54000,48000]},
-{nombre:"Samsung A17",ram:"8GB",alm:"256GB",id:"a17",precios:[175000,117000,98000,88000,78000]},
-{nombre:"Samsung A36",ram:"8GB",alm:"128GB",id:"a36_128",precios:[201000,134000,112000,101000,90000]},
-{nombre:"Samsung A36",ram:"8GB",alm:"256GB",id:"a36_256",precios:[217000,145000,120000,109000,96000]}
-]
+{nombre:"Redmi 14C",ram:"8GB",alm:"256GB",id:"redmi14c",precios:[110000,74000,62000,55000,49000],colores:["Negro","Azul","Verde","Morado"]},
+{nombre:"Motorola G04s",ram:"4GB",alm:"64GB",id:"g04s",precios:[92000,61000,51000,46000,41000],colores:["Negro","Azul","Verde"]},
+{nombre:"Samsung A06",ram:"4GB",alm:"64GB",id:"a06",precios:[84000,56000,46000,42000,37000],colores:["Negro","Celeste","Verde","Dorado"]},
+{nombre:"Samsung A07",ram:"4GB",alm:"64GB",id:"a07_64",precios:[90000,60000,50000,45000,40000],colores:["Negro","Violeta","Verde"]},
+{nombre:"Samsung A07",ram:"4GB",alm:"128GB",id:"a07_128",precios:[104000,69000,58000,52000,46000],colores:["Negro","Violeta","Verde"]},
+{nombre:"Samsung A16",ram:"4GB",alm:"128GB",id:"a16",precios:[108000,72000,60000,54000,48000],colores:["Negro","Verde","Celeste","Gris"]},
+{nombre:"Samsung A17",ram:"8GB",alm:"256GB",id:"a17",precios:[175000,117000,98000,88000,78000],colores:["Negro","Verde","Celeste","Gris"]},
+{nombre:"Samsung A36",ram:"8GB",alm:"128GB",id:"a36_128",precios:[201000,134000,112000,101000,90000],colores:["Negro","Verde","Celeste","Gris"]},
+{nombre:"Samsung A36",ram:"8GB",alm:"256GB",id:"a36_256",precios:[217000,145000,120000,109000,96000],colores:["Negro","Verde","Celeste","Gris"]}
+];
 
-let seleccion={};
+let seleccion={},colorElegido={};
 
 function crearCatalogo(lista){
 document.getElementById("productos").innerHTML="";
 lista.forEach(cel=>{
+let coloresHTML="";
+cel.colores.forEach(color=>{
+coloresHTML+=`<div class="btn" onclick="setColor('${cel.id}','${color}',this)">${color}</div>`;
+});
 document.getElementById("productos").innerHTML+=`
 <div class="card">
 <h2>${cel.nombre}</h2>
 <p>${cel.ram} RAM · ${cel.alm}</p>
+<p><b>Colores disponibles</b></p>
+<div class="buttons">${coloresHTML}</div>
 <div class="buttons">
 <div class="btn" onclick="setPlan('${cel.id}',0,this)">3</div>
 <div class="btn" onclick="setPlan('${cel.id}',1,this)">6</div>
@@ -130,6 +128,12 @@ document.getElementById("productos").innerHTML+=`
 }
 crearCatalogo(celulares);
 
+function setColor(id,color,btn){
+colorElegido[id]=color;
+btn.parentNode.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+}
+
 function setPlan(id,index,btn){
 let cel=celulares.find(c=>c.id==id);
 seleccion[id]=index;
@@ -143,8 +147,9 @@ let cel=celulares.find(c=>c.id==id);
 let cuotas=[3,6,9,12,18];
 let index=seleccion[id]??2;
 let cuota=cel.precios[index];
+let color=colorElegido[id]??"a definir";
 let restantes=cuotas[index]-1;
-let msg=`Hola Teleconix! Me interesa el ${cel.nombre} ${cel.ram} ${cel.alm}.
+let msg=`Hola Teleconix! Me interesa el ${cel.nombre} ${cel.ram} ${cel.alm} color ${color}.
 Quisiera financiarlo en ${cuotas[index]} cuotas de $${cuota}.
 Inicio la compra abonando la primera cuota hoy y luego ${restantes} cuotas mensuales.`;
 window.open(`https://wa.me/5493751667267?text=${encodeURIComponent(msg)}`);
