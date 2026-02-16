@@ -48,41 +48,15 @@ filter:blur(45px);animation:pulse 4s infinite;top:-30px;left:-40px;z-index:-1}
 <body>
 <canvas id="bg"></canvas>
 
-<!-- HERO -->
 <section class="hero">
 <div class="logoGlow"><h1>TELECONIX</h1></div>
 <p>Pagando la primera cuota hoy mismo podés iniciar la compra de tu smartphone.</p>
 <a href="#catalogo" class="btnCatalogo">Ver catálogo</a>
 </section>
 
-<!-- POR QUE ELEGIR -->
-<section class="section">
-<div class="box">
-<h3>¿Por qué elegir Teleconix?</h3>
-<p>📱 Equipos nuevos y sellados<br>💳 Financiación directa sin tarjeta<br>🧾 Compra por encargo personalizada<br>🤝 Atención directa por WhatsApp</p>
-</div>
-</section>
-
-<!-- COMO FUNCIONA -->
-<section class="section">
-<div class="box">
-<h3>¿Cómo funciona la compra?</h3>
-<p>1️⃣ Elegís el celular y cuotas<br>2️⃣ Coordinamos por WhatsApp<br>3️⃣ Pagás la primera cuota<br>4️⃣ Iniciamos el pedido<br>5️⃣ Recibís tu smartphone 📦</p>
-</div>
-</section>
-
-<!-- CATALOGO -->
 <section id="catalogo" class="section">
 <input class="search" id="searchInput" placeholder="Buscar celular...">
 <div id="productos"></div>
-</section>
-
-<!-- REQUISITOS -->
-<section class="section">
-<div class="box">
-<h3>Requisitos para adquirir en cuotas</h3>
-<p>Fotocopia DNI · Firma contrato · Sistema bloqueo · Vinculación número.</p>
-</div>
 </section>
 
 <a class="whatsappFloat" href="https://wa.me/5493751667267">💬</a>
@@ -96,8 +70,10 @@ function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle="
 particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();p.y+=0.3;if(p.y>canvas.height)p.y=0});
 requestAnimationFrame(animate)}animate();
 
-// CATALOGO COMPLETO
+// CATÁLOGO COMPLETO
 const celulares=[
+{nombre:"Redmi 14C",ram:"8GB",alm:"256GB",id:"redmi14c",precios:[110000,74000,62000,55000,49000]},
+{nombre:"Motorola G04s",ram:"4GB",alm:"64GB",id:"g04s",precios:[92000,61000,51000,46000,41000]},
 {nombre:"Samsung A06",ram:"4GB",alm:"64GB",id:"a06",precios:[84000,56000,46000,42000,37000]},
 {nombre:"Samsung A07",ram:"4GB",alm:"64GB",id:"a07_64",precios:[90000,60000,50000,45000,40000]},
 {nombre:"Samsung A07",ram:"4GB",alm:"128GB",id:"a07_128",precios:[104000,69000,58000,52000,46000]},
@@ -106,6 +82,7 @@ const celulares=[
 {nombre:"Samsung A36",ram:"8GB",alm:"128GB",id:"a36_128",precios:[201000,134000,112000,101000,90000]},
 {nombre:"Samsung A36",ram:"8GB",alm:"256GB",id:"a36_256",precios:[217000,145000,120000,109000,96000]}
 ]
+
 let seleccion={};
 
 function crearCatalogo(lista){
