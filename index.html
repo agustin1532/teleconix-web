@@ -13,6 +13,7 @@ body{
   color:white;
 }
 
+/* HERO ANIMADO */
 .hero{
   height:80vh;
   display:flex;
@@ -20,79 +21,72 @@ body{
   justify-content:center;
   align-items:center;
   text-align:center;
+  background:linear-gradient(45deg,#0c0f2b,#1a1f5a,#0c0f2b);
+  background-size:400% 400%;
+  animation:gradient 8s infinite;
+}
+@keyframes gradient{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
 
-.hero h1{
-  font-size:45px;
+.hero h1{font-size:45px;color:#ffd000;}
+.hero p{color:#c7c9ff;margin:20px;max-width:300px;}
+.btnCatalogo{
+  background:#ffd000;padding:15px 25px;border-radius:20px;
+  text-decoration:none;color:black;font-weight:bold;
+}
+
+/* CATALOGO */
+.catalogo{padding:20px;max-width:500px;margin:auto;}
+.search{width:100%;padding:15px;border-radius:15px;border:none;margin-bottom:30px;}
+.card{background:#171a3f;padding:20px;border-radius:20px;margin-bottom:25px;}
+
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+.btn{
+  background:#2a2f55;padding:8px 12px;border-radius:10px;cursor:pointer;
+  position:relative;
+}
+.btn.active{background:rgba(255,208,0,0.4);}
+
+/* etiqueta mas popular */
+.popular::before{
+  content:"Más popular";
+  position:absolute;
+  top:-15px;
+  left:0;
+  right:0;
+  text-align:center;
+  font-size:10px;
   color:#ffd000;
 }
 
-.hero p{
-  color:#c7c9ff;
-  margin:20px;
-}
+.priceBox{margin-top:15px;background:#2a2f55;padding:10px;border-radius:10px;}
 
-.btnCatalogo{
-  background:#ffd000;
-  padding:15px 25px;
-  border-radius:20px;
-  text-decoration:none;
-  color:black;
-  font-weight:bold;
-}
-
-.catalogo{
-  padding:20px;
-  max-width:500px;
-  margin:auto;
-}
-
-.search{
-  width:100%;
-  padding:15px;
+.buyBtn{
+  margin-top:15px;
+  background:#25d366;
+  padding:12px;
   border-radius:15px;
-  border:none;
-  margin-bottom:30px;
-}
-
-.card{
-  background:#171a3f;
-  padding:20px;
-  border-radius:20px;
-  margin-bottom:25px;
-}
-
-.buttons{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:10px;
-}
-
-.btn{
-  background:#2a2f55;
-  padding:8px 12px;
-  border-radius:10px;
+  text-align:center;
   cursor:pointer;
 }
 
-.priceBox{
-  margin-top:15px;
-  background:#2a2f55;
-  padding:10px;
-  border-radius:10px;
-}
-
+/* WhatsApp flotante */
 .whatsappFloat{
   position:fixed;
   bottom:20px;
   right:20px;
   background:#25d366;
-  color:white;
   padding:15px;
-  border-radius:50px;
-  text-decoration:none;
-  font-weight:bold;
+  border-radius:50%;
+  animation:float 2s infinite;
+}
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+  100%{transform:translateY(0)}
 }
 </style>
 </head>
@@ -101,49 +95,32 @@ body{
 
 <section class="hero">
 <h1>TELECONIX</h1>
-<p>Celulares en cuotas. Te lo llevás hoy pagando la primera.</p>
+<p>Pagando la primera cuota hoy mismo podés tener tu nuevo smartphone.</p>
 <a href="#catalogo" class="btnCatalogo">Ver Catálogo</a>
 </section>
 
 <section id="catalogo" class="catalogo">
-
 <input class="search" id="searchInput" placeholder="Buscar celular...">
-
 <div id="productos"></div>
-
 </section>
 
-<a class="whatsappFloat" href="https://wa.me/5493751667267">WhatsApp</a>
+<a class="whatsappFloat" href="https://wa.me/5493751667267">💬</a>
 
 <script>
 
-const celulares = [
-{
-nombre:"Samsung A16",
-ram:"4GB",
-alm:"128GB",
-id:"a16",
-precios:[110000,73000,61000,55000,49000]
-},
-{
-nombre:"Redmi 14C",
-ram:"8GB",
-alm:"256GB",
-id:"redmi",
-precios:[110000,74000,62000,55000,49000]
-},
-{
-nombre:"Motorola G04s",
-ram:"4GB",
-alm:"64GB",
-id:"g04s",
-precios:[92000,61000,51000,46000,41000]
-}
+const celulares=[
+{nombre:"Samsung A16",ram:"4GB",alm:"128GB",id:"a16",
+precios:[110000,73000,61000,55000,49000]},
+{nombre:"Redmi 14C",ram:"8GB",alm:"256GB",id:"redmi",
+precios:[110000,74000,62000,55000,49000]},
+{nombre:"Motorola G04s",ram:"4GB",alm:"64GB",id:"g04s",
+precios:[92000,61000,51000,46000,41000]}
 ]
+
+let seleccion={};
 
 function crearCatalogo(lista){
 document.getElementById("productos").innerHTML="";
-
 lista.forEach(cel=>{
 document.getElementById("productos").innerHTML+=`
 <div class="card">
@@ -153,7 +130,7 @@ document.getElementById("productos").innerHTML+=`
 <div class="buttons">
 <div class="btn" onclick="setPlan('${cel.id}',0)">3</div>
 <div class="btn" onclick="setPlan('${cel.id}',1)">6</div>
-<div class="btn" onclick="setPlan('${cel.id}',2)">9 ⭐</div>
+<div class="btn popular" onclick="setPlan('${cel.id}',2)">9</div>
 <div class="btn" onclick="setPlan('${cel.id}',3)">12</div>
 <div class="btn" onclick="setPlan('${cel.id}',4)">18</div>
 </div>
@@ -161,8 +138,9 @@ document.getElementById("productos").innerHTML+=`
 <div class="priceBox">
 <p>Cuota: <b id="${cel.id}">$${cel.precios[2]}</b></p>
 </div>
-</div>
-`;
+
+<div class="buyBtn" onclick="comprar('${cel.id}')">Comprar por WhatsApp</div>
+</div>`;
 });
 }
 
@@ -170,16 +148,24 @@ crearCatalogo(celulares);
 
 function setPlan(id,index){
 let cel=celulares.find(c=>c.id==id);
+seleccion[id]=index;
 document.getElementById(id).innerText="$"+cel.precios[index];
+}
+
+function comprar(id){
+let cel=celulares.find(c=>c.id==id);
+let cuota=cel.precios[seleccion[id]||2];
+let msg=`Hola Teleconix! Me interesa el ${cel.nombre} ${cel.ram} ${cel.alm}.
+Quisiera adquirirlo en ${seleccion[id]?seleccion[id]+3:9} cuotas de $${cuota}.
+Entiendo que lo retiro pagando la primera cuota hoy.`;
+window.open(`https://wa.me/5493751667267?text=${encodeURIComponent(msg)}`);
 }
 
 document.getElementById("searchInput").addEventListener("keyup",function(){
 let texto=this.value.toLowerCase();
-let filtrados=celulares.filter(c=>c.nombre.toLowerCase().includes(texto));
-crearCatalogo(filtrados);
+crearCatalogo(celulares.filter(c=>c.nombre.toLowerCase().includes(texto)));
 })
 
 </script>
-
 </body>
 </html>
