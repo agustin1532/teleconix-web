@@ -9,78 +9,121 @@
 body{margin:0;font-family:Arial;background:#0c0f2b;color:white}
 
 /* ✨ LUZ LOGO */
-.logoGlow{
-position:relative;
-display:inline-block;
-}
+.logoGlow{position:relative;display:inline-block}
 .logoGlow::before{
-content:"";
-position:absolute;
-width:260px;height:120px;
+content:"";position:absolute;width:260px;height:120px;
 background:radial-gradient(circle,rgba(255,208,0,0.8),rgba(0,140,255,0.5),transparent);
-filter:blur(45px);
-animation:pulse 5s infinite;
-top:-30px;left:-40px;
-z-index:-1;
-}
-@keyframes pulse{
-0%{opacity:0.3;transform:scale(0.9)}
-50%{opacity:1;transform:scale(1.2)}
-100%{opacity:0.3;transform:scale(0.9)}
-}
+filter:blur(45px);animation:pulse 5s infinite;top:-30px;left:-40px;z-index:-1}
+@keyframes pulse{0%{opacity:0.3;transform:scale(0.9)}50%{opacity:1;transform:scale(1.2)}100%{opacity:0.3;transform:scale(0.9)}}
 
-.hero{
-height:80vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-}
+.hero{height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .hero h1{font-size:48px;color:#ffd000}
 .hero p{max-width:330px;color:#c7c9ff;margin:20px}
-.btnCatalogo{
-background:#ffd000;padding:15px 25px;border-radius:20px;
-text-decoration:none;color:black;font-weight:bold;
-}
+.btnCatalogo{background:#ffd000;padding:15px 25px;border-radius:20px;text-decoration:none;color:black;font-weight:bold}
 
-/* SECCIONES */
 .section{padding:30px 20px;max-width:550px;margin:auto}
 .box{background:#171a3f;padding:20px;border-radius:20px;margin-bottom:20px}
 
-/* BOTON PDF */
-.downloadBtn{
-background:#ffd000;color:black;padding:15px;border-radius:15px;
-text-align:center;font-weight:bold;margin-top:15px;text-decoration:none;display:block;
-}
+.search{width:100%;padding:15px;border-radius:15px;border:none;margin-bottom:30px}
+
+.card{background:#171a3f;padding:20px;border-radius:20px;margin-bottom:25px}
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.btn{background:#2a2f55;padding:8px 12px;border-radius:10px;cursor:pointer;position:relative}
+.btn.active{background:rgba(255,208,0,0.4)}
+.popular{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:#ffd000;color:black;font-size:10px;padding:2px 6px;border-radius:8px}
+.priceBox{margin-top:15px;background:#2a2f55;padding:10px;border-radius:10px}
+.buyBtn{margin-top:15px;background:#25d366;padding:12px;border-radius:15px;text-align:center;cursor:pointer}
+
+.whatsappFloat{position:fixed;bottom:20px;right:20px;background:#25d366;width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:28px;animation:float 2s infinite;text-decoration:none;color:white}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
 <section class="hero">
-<div class="logoGlow">
-<h1>TELECONIX</h1>
-</div>
+<div class="logoGlow"><h1>TELECONIX</h1></div>
 <p>Pagando la primera cuota hoy mismo podés iniciar la compra de tu smartphone.</p>
-<a href="#requisitos" class="btnCatalogo">Ver información</a>
+<a href="#catalogo" class="btnCatalogo">Ver catálogo</a>
 </section>
 
-<!-- REQUISITOS -->
-<section id="requisitos" class="section">
+<section class="section">
 <div class="box">
-<h2>Requisitos para adquirir un teléfono en cuotas</h2>
-
-<p>1️⃣ Fotocopia del DNI (ambos lados) + DNI original.</p>
-<p>2️⃣ Firma de recibo y contrato de compra como respaldo.</p>
-<p>3️⃣ Sistema de bloqueo automático ante falta de pago.</p>
-<p>4️⃣ Vinculación del número telefónico al servicio.</p>
-
-<a href="#" class="downloadBtn">📄 Ver requisitos completos</a>
-
+<h3>¿Por qué elegir Teleconix?</h3>
+<p>📱 Equipos nuevos y sellados<br>
+💳 Financiación directa sin tarjeta<br>
+🧾 Compra por encargo personalizada<br>
+🤝 Atención directa por WhatsApp</p>
 </div>
 </section>
 
+<section id="catalogo" class="section">
+<input class="search" id="searchInput" placeholder="Buscar celular...">
+<div id="productos"></div>
+</section>
+
+<section class="section">
+<div class="box">
+<h3>Requisitos para adquirir en cuotas</h3>
+<p>Fotocopia DNI · Firma contrato · Sistema bloqueo · Vinculación número.</p>
+</div>
+</section>
+
+<a class="whatsappFloat" href="https://wa.me/5493751667267">💬</a>
+
+<script>
+const celulares=[
+{nombre:"Samsung A16",ram:"4GB",alm:"128GB",id:"a16",precios:[110000,73000,61000,55000,49000]},
+{nombre:"Redmi 14C",ram:"8GB",alm:"256GB",id:"redmi",precios:[110000,74000,62000,55000,49000]},
+{nombre:"Motorola G04s",ram:"4GB",alm:"64GB",id:"g04s",precios:[92000,61000,51000,46000,41000]}
+]
+let seleccion={};
+
+function crearCatalogo(lista){
+document.getElementById("productos").innerHTML="";
+lista.forEach(cel=>{
+document.getElementById("productos").innerHTML+=`
+<div class="card">
+<h2>${cel.nombre}</h2>
+<p>${cel.ram} RAM · ${cel.alm}</p>
+<div class="buttons">
+<div class="btn" onclick="setPlan('${cel.id}',0,this)">3</div>
+<div class="btn" onclick="setPlan('${cel.id}',1,this)">6</div>
+<div class="btn" onclick="setPlan('${cel.id}',2,this)">9<div class="popular">POPULAR</div></div>
+<div class="btn" onclick="setPlan('${cel.id}',3,this)">12</div>
+<div class="btn" onclick="setPlan('${cel.id}',4,this)">18</div>
+</div>
+<div class="priceBox"><p>Cuota mensual: <b id="${cel.id}">$${cel.precios[2]}</b></p></div>
+<div class="buyBtn" onclick="comprar('${cel.id}')">Comprar por WhatsApp</div>
+</div>`;
+});
+}
+crearCatalogo(celulares);
+
+function setPlan(id,index,btn){
+let cel=celulares.find(c=>c.id==id);
+seleccion[id]=index;
+document.getElementById(id).innerText="$"+cel.precios[index];
+btn.parentNode.querySelectorAll('.btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+}
+
+function comprar(id){
+let cel=celulares.find(c=>c.id==id);
+let cuotas=[3,6,9,12,18];
+let index=seleccion[id]??2;
+let cuota=cel.precios[index];
+let restantes=cuotas[index]-1;
+let msg=`Hola Teleconix! Me interesa el ${cel.nombre} ${cel.ram} ${cel.alm}.
+Quisiera financiarlo en ${cuotas[index]} cuotas de $${cuota}.
+Inicio la compra abonando la primera cuota hoy y luego ${restantes} cuotas mensuales.`;
+window.open(`https://wa.me/5493751667267?text=${encodeURIComponent(msg)}`);
+}
+
+document.getElementById("searchInput").addEventListener("keyup",function(){
+let texto=this.value.toLowerCase();
+crearCatalogo(celulares.filter(c=>c.nombre.toLowerCase().includes(texto)));
+})
+</script>
 </body>
 </html>
