@@ -248,6 +248,9 @@ document.getElementById("searchInput").addEventListener("keyup",function(){
 let t=this.value.toLowerCase();
 crearCatalogo(celulares.filter(c=>c.nombre.toLowerCase().includes(t)));
 })
+window.onload = function() {
+crearCatalogo(celulares);
+};
 </script>
 </body>
 </html>
