@@ -245,7 +245,6 @@ Quedo atento para continuar con la gestión. Muchas gracias.`;
 
 window.open(`https://wa.me/5493751667267?text=${encodeURIComponent(msg)}`);
 }
-crearCatalogo(celulares);
 document.getElementById("searchInput").addEventListener("keyup",function(){
 let t=this.value.toLowerCase();
 crearCatalogo(celulares.filter(c=>c.nombre.toLowerCase().includes(t)));
