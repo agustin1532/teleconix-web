@@ -54,10 +54,16 @@ filter:blur(45px);animation:pulse 4s infinite;top:-30px;left:-40px;z-index:-1}
 <p>Elegís el equipo → Pagás primera cuota → Pedimos el equipo → Lo recibís 📦</p>
 </div></section>
 
-<section id="catalogo" class="section">
+<!-- BOTONES MARCAS -->
+<div class="buttons" style="margin-bottom:20px">
+<div class="btn active" onclick="filtrarMarca('todos',this)">Todos</div>
+<div class="btn" onclick="filtrarMarca('xiaomi',this)">Xiaomi</div>
+<div class="btn" onclick="filtrarMarca('motorola',this)">Motorola</div>
+<div class="btn" onclick="filtrarMarca('samsung',this)">Samsung</div>
+</div>
+
 <input class="search" id="searchInput" placeholder="Buscar celular...">
 <div id="productos"></div>
-</section>
 
 <section class="section"><div class="box">
 <h3>Requisitos</h3>
@@ -174,6 +180,29 @@ ${avisoHTML}
 });
 }
 crearCatalogo(celulares);
+
+}
+
+function filtrarMarca(marca,btn){
+
+// activar botón seleccionado
+document.querySelectorAll('.buttons .btn').forEach(b=>b.classList.remove('active'));
+if(btn) btn.classList.add('active');
+
+// mostrar todos
+if(marca=="todos"){
+crearCatalogo(celulares);
+return;
+}
+
+// filtrar por marca
+let filtrados = celulares.filter(c =>
+c.nombre.toLowerCase().includes(marca)
+);
+
+crearCatalogo(filtrados);
+}
+
 
 function setColor(id,color,btn){
 colorElegido[id]=color;
