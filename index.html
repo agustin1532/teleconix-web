@@ -416,7 +416,7 @@ function crearCatalogo(lista){
 document.getElementById("productos").innerHTML="";
 lista.forEach(cel=>{
 let imgHTML="";
-if(cel.imagenes){imgHTML=`<img id="img-${cel.id}" src="${cel.imagenes.Negro}" class="phoneImg">`;}
+if(cel.imagenes){imgHTML=`<img id="img-${cel.id}" src="${cel.imagenes[primercolor]}" class="phoneImg">`;}
 let coloresHTML="";
 cel.colores.forEach(color=>{coloresHTML+=`<div class="btn" onclick="setColor('${cel.id}','${color}',this)">${color}</div>`});
 let avisoHTML=cel.aviso?`<div class="aviso">🔒 Se solicitarán datos adicionales</div>`:"";
